@@ -1,0 +1,53 @@
+.bg-jumbotron-img {
+    background-image: url(../../../Content/Images/IndexImage.jpg); 
+    height: 347px;
+}
+
+.min-card-width {
+    min-width: 300px;
+}
+
+.uyeOlFormContainer {
+    margin-top: 20px;
+}
+
+.carousel {
+    border-radius: 25px 25px 25px 25px;
+    overflow: hidden;
+}
+.card {
+
+    border-radius: 15px 15px 15px 15px;
+    overflow: hidden;
+}
+.media-text{
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.95rem !important;
+    font-weight: bolder;
+}
+.text-calc{
+    font-size: calc(12px + (15 - 12) * ((100vw - 360px) / (1600 - 360))) !important
+}
+.btn-outline-danger{
+    border:2px solid !important ;
+}
+body{
+    background-color:rgb(244, 245, 247);
+    font-family: 'Rubik', sans-serif;
+}
+.login-page {
+    margin-top: auto;
+    margin-left: auto;
+    margin-top: 200px;
+}
+
+.pp {
+    width: 38px !important;
+    height: 38px !important;
+}
+.mt-20{
+    margin-top: 80px !important;
+}
+p {
+    word-break: break-all;
+}

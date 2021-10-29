@@ -1,0 +1,79 @@
+﻿@using BitirmeProV3.Models.Entity;
+@model List<TBL_IndexKart>
+
+@* Listeyi Ters çevirdik AsEnumerable *@
+@foreach (var card in Model.AsEnumerable().Reverse())
+{
+    if (card.Durum == true)
+    {
+        <div class="col-md-3 mb-3">
+
+            <div class="card ">
+                <a style=" max-height:250px;" href='@Url.Action("CardPage","CardPage",new {id=card.IndexKartID})'><img class="card-img-top" style="height:236px;" src="@card.KartResim1" alt=""></a>
+                <div class=" d-inline-block m-1">
+                    <div class="">
+                        <div>
+                            <a class="" href='@Url.Action("Profil","Profil",new {kullaniciAdi=card.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi })'>
+                                <img class="float-left rounded-circle"
+                                     src="@card.TBL_Kullanici.TBL_KullaniciOzellik.ProfilResmi" href='@Url.Action("Profil","Profil",new {kullaniciAdi=card.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi })' style="width:38px; height:38px;" alt="">
+                            </a>
+                        </div>
+                        <div class="d-inline-block ml-1" style="height: 36px;">
+                            <div>
+
+                                <a class="text-dark d-block font-weight-bold" style="font-size:14px" id="link" href='@Url.Action("Profil","Profil",new {kullaniciAdi=card.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi })' name="link" value="Profil">
+                                    @card.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi
+                                </a>
+                            </div>
+                            <div>
+                                <p style="font-size:12px">@card.TBL_Kullanici.TBL_KullaniciOzellik.Unvani</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body pt-1">
+                    <div class="card-text " style="height:90px">
+                        @if (card.KartBaslik.Length > 90)
+                        {
+                            @Html.Raw(card.KartBaslik.Substring(0, 80));
+
+                            <span>...</span>
+                        }
+                        else
+                        {
+                            @Html.Raw(card.KartBaslik)
+                        }
+                    </div>
+                    
+                </div>
+                @if (false == card.AliciSatici)
+                {
+                    <div class="row justify-content-end mb-2 mr-3">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a href='@Url.Action("CardPage","CardPage",new {id=card.IndexKartID})' class="btn btn-outline-primary">@card.Fiyat<span>TL</span></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row justify-content-end mb-2 mr-3">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a href='@Url.Action("CardPage","CardPage",new {id=card.IndexKartID})' class="btn btn-outline-success">YARDIM</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            @*}*@
+        </div>
+    }
+
+
+
+
+
+}

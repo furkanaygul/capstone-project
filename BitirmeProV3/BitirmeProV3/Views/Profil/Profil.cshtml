@@ -1,0 +1,259 @@
+﻿@using BitirmeProV3.Models.Entity;
+@model BitirmeProV3.Models.ProfilModel
+
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container-fluid mt-20">
+    <div class="row">
+        <div style="height: auto;" class="col-lg-3 col-xl-3 col-md-4 bg-light">
+            <div class="mt-3">
+                <div class="mx-auto">
+                    <img style="height: 200px; width: 200px;" class="d-block mx-auto rounded-circle"
+                         src="@Model.Kullanici.TBL_KullaniciOzellik.ProfilResmi">
+                    <div class="d-flex align-content-center flex-column">
+                        <h5 class="text-center mb-0">@Model.Kullanici.Adi<i class="fas fa-check-circle p-2"></i></h5>
+                        <small class="text-center my-0">@Model.Kullanici.TBL_KullaniciOzellik.Unvani</small>
+                    </div>
+
+
+
+
+                    <p class="text-center font-italic mt-3">
+                        @Model.Kullanici.TBL_KullaniciOzellik.Biyografi
+                    </p>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="row bg-light center text-dark p-1">
+                            <i class="fas fa-briefcase col-1 mt-1"></i>
+                            <p class="col-6  mb-0 aling-self-start font-weight-light">Toplam Aldığı Yorum</p>
+                            <h6 class="col-4 mb-0 aling-self-end text-right pl-1 ml-auto">@Model.ToplamYorum</h6>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row bg-light center text-dark  p-1">
+                            <i class="fas fa-star col-1 mt-1"></i>
+                            <p class="col-6  mb-0 aling-self-start font-weight-light">Ortalama Puan</p>
+                            <h6 class="col-4  mb-0 aling-self-end text-right pl-1 ml-auto">@Model.OrtalamaPuan <i class="fas fa-star"></i></h6>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row bg-light center text-dark  p-1">
+                            <i class="fas fa-eye col-1 mt-1"></i>
+                            <p class="col-6  mb-0 aling-self-start font-weight-light">Son Giriş</p>
+                            <h6 class="col-4  mb-0 aling-self-end text-right pl-1 ml-auto">@Model.Kullanici.TBL_Profil.SonGiris</h6>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row bg-light center text-dark  p-1">
+                            <i class="fas fa-user-plus col-1 mt-1"></i>
+                            <p class="col-6  mb-0 aling-self-start font-weight-light">Üyelik Tarihi</p>
+                            <h6 class="col-4  mb-0 aling-self-end text-right pl-1 ml-auto">@Model.Kullanici.UyelikTarihi</h6>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center col-12">
+                        <button class="btn btn-outline-info btn-lg mt-2 mb-3">Mesaj Gönder</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-9 col-xl-9 col-md-8">
+            <div class="container">
+                <!-- CARAUSEL SLİDER -->
+                <div class="row mt-3 d-flex justify-content-center">
+                    <div class="col-lg-12">
+                        <div id="carouselExampleControls" class="carousel slide  " data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" style="height: 400px;"
+                                         src='@Model.Kullanici.TBL_Profil.TBL_ProfilIcerik.ProfilCarouselPic1'
+                                         alt="First slide">
+                                </div>
+                                @if (Model.Kullanici.TBL_Profil.TBL_ProfilIcerik.ProfilCarouselPic2 != "/Content/Images/Carousel_800x400.png")
+                                {
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100 " style="height: 400px;"
+                                             src="@Model.Kullanici.TBL_Profil.TBL_ProfilIcerik.ProfilCarouselPic2"
+                                             alt="Second slide">
+                                    </div>
+                                }
+                                @if (Model.Kullanici.TBL_Profil.TBL_ProfilIcerik.ProfilCarouselPic3 != "/Content/Images/Carousel_800x400.png")
+                                {
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100 " style="height: 400px;"
+                                             src="@Model.Kullanici.TBL_Profil.TBL_ProfilIcerik.ProfilCarouselPic3"
+                                             alt="Third slide">
+                                    </div>
+                                }
+
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                               data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                               data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- CARAUSEL SLİDER END -->
+                <div class="row">
+                    <div class="col p-3 mx-4 mt-3 border rounded">
+
+                        @Html.Raw(Model.Kullanici.TBL_Profil.TBL_ProfilIcerik.ProfilAciklama)
+                            
+                       
+
+                    </div>
+                </div>
+                <div class="row mt-1 p-2">
+                    @foreach (var item in Model.Kullanici.TBL_Profil.TBL_ProfilKart.AsEnumerable().Reverse())
+                    {
+                        <div class="mt-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
+                            <div class="card">
+                                @if (Model.Kullanici.TBL_KullaniciOzellik.KullaniciAdi == User.Identity.Name)
+                                {
+                                    @Html.ActionLink("Sil", "ProfilCardDelete", new { id = item.ProfilKartID },new {@class="bg-danger text-white text-center" });
+                                
+
+                                }
+                                <img src="@item.PKart_Resim" alt="Card image cap" style="height:241px" class="card-img-top">
+                                <div class="card-body" style="height:220px">
+
+                                    <h5 class="card-title">@item.PKart_Baslik</h5>
+                                    <p class="card-text">@item.PKart_Aciklama</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                    @*<div class="mt-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6">
+                        <div class="card ">
+                            <img src="https://picsum.photos/100" alt="Card image cap" class="card-img-top">
+                            <div class="card-body" >
+                                <h5 class="card-title">Web Site Tasarimi</h5>
+                                <p class="card-text">Ben sizin icin web sitesi tasarlayabilirimBen sizin icin web sitesi tasarlayabilirimBen sizin icin web sitesi tasarlayabilirimBen sizin icin web sitesi tasarlayabilirim</p>
+
+                            </div>
+                        </div>
+                    </div>*@
+                   
+
+
+                </div>
+
+
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (Model.Kullanici.TBL_KullaniciOzellik.KullaniciAdi != User.Identity.Name)
+                    {
+
+
+                        using (Html.BeginForm("YorumEkle", "Profil", new { profil = Model.Kullanici.TBL_KullaniciOzellik.KullaniciAdi, YorumYapanAdi = User.Identity.Name }, FormMethod.Post, new { @class = "col-md-12" }))
+                        {<div class="col-md-12">
+                                <div class="media border rounded mt-2 p-3">
+
+                                    <div class="media-body">
+                                        <h5>
+                                            @User.Identity.Name Olarak Yorum Yaz.
+                                        </h5>
+
+                                        <p class="media-text rounded p-3 bg-light">
+                                            @Html.TextAreaFor(i => i.yorum, new { @class = "media-text rounded p-3 bg-light w-100 ", col = "4", id = "summernote" })
+                                        </p>
+                                        <label>PUANINIZ:</label>
+                                        @Html.DropDownListFor(i => i.puan, new List<SelectListItem> {new SelectListItem {
+                                                Text="1",
+                                                 Value="1"
+                                                    },
+                                                new SelectListItem {
+                                                Text="2",
+                                                Value="2",
+                                                 },new SelectListItem {
+                                                Text="3",
+                                                Value="3",
+                                                 },new SelectListItem {
+                                                Text="4",
+                                                Value="4",
+                                                 },new SelectListItem {
+                                                Text="5",
+                                                Value="5",
+                                                 } }, new { @class = "btn btn-secondary", })
+                                        <button class="btn btn-success ml-auto">GÖNDER</button>
+                                    </div>
+
+                                </div>
+                            </div>}
+
+                    }
+                }
+                @foreach (var item in Model.Kullanici.TBL_Yorumlar.AsEnumerable().Reverse())
+                {
+                    if (item.KullaniciID == Model.Kullanici.KullaniciID)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="media border rounded mt-2 p-3">
+
+                                    <img src="@item.YorumYapanKulPP" alt="@item.YorumYapanKulAdi" class="mr-3 mt-3 rounded-circle"
+                                         style="width:60px; height:60px">
+
+                                    <div class="media-body">
+                                        <h5>
+                                            @item.YorumYapanKulAdi<small class="ml-2">
+                                                @for (int i = 0; i < 5; i++)
+                                                {
+                                                    if (item.Puan > i)
+                                                    {
+                                                        <i class="fas fa-star"></i>
+                                                    }
+                                                    else
+                                                    {<i class="far fa-star"></i>}
+                                                }
+
+                                            </small>
+                                            <small><i>@item.Tarih</i></small>
+                                        </h5>
+                                        <div class="media-text rounded p-3 bg-light" style="word-break: break-all">@Html.Raw(item.Yorum)</div>
+                                        
+                                        @if (item.YorumYapanKulAdi == User.Identity.Name)
+                                        {
+                                            <div class="d-flex flex-row-reverse"><a href='@Url.Action("YorumSil","Profil",new {id=item.YorumID,profil=Model.Kullanici.TBL_KullaniciOzellik.KullaniciAdi })'><i class="fa fa-trash"></i></a></div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+    
+
+</div>

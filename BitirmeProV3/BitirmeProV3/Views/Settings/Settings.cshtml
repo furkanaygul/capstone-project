@@ -1,0 +1,364 @@
+﻿@model BitirmeProV3.Models.SettingsModel
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container mt-5" style="padding-top: 50px;">
+    <div class="row">
+        <div class="col-4 ">
+            <div class="list-group" id="list-tab" role="tablist">
+
+                <a class="list-group-item list-group-item-action active" id="list-profil-list" data-toggle="list"
+                   href="#list-profil" role="tab" aria-controls="profil">Kullanıcı Ayarları</a>
+                <a class="list-group-item list-group-item-action" id="list-profil-guncelle" data-toggle="list"
+                   href="#list-profil-guncel" role="tab" aria-controls="list-profil-guncel">Profil Ayarları</a>
+                <a class="list-group-item list-group-item-action" id="list-password-list" data-toggle="list"
+                   href="#list-password" role="tab" aria-controls="password">Şifreyi Değiştir</a>
+                <a class="list-group-item list-group-item-action" id="list-ilan-list" data-toggle="list" href="#list-ilan"
+                   role="tab" aria-controls="ilan">İlanlarım</a>
+
+            </div>
+        </div>
+        <div class="col-8 p-4  bg-light">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active p-3" id="list-profil" role="tabpanel" aria-labelledby="list-profil-list">
+                    @using (Html.BeginForm("Settings", "Settings", new { resetpp = "false" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count() > 0)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @Html.ValidationSummary()
+                            </div>
+
+                        }
+                        if (ViewBag.success != null)
+                        {
+                            <div class="alert alert-success" role="alert">
+                                @ViewBag.success
+                            </div>
+
+                        }
+
+
+
+                        <div class="form-group row">
+                            <label for="profilPicture" class="col-sm-3 col-form-label">
+                                <div>
+                                    <img style="width: 80px; height: 80px;" class="img-circle rounded-circle"
+                                         src="@Model.kullanici.TBL_KullaniciOzellik.ProfilResmi" alt="">
+                                    @Html.TextBoxFor(i => i.kullanici.KullaniciID, new { style = "display: none;" })
+                                </div>
+                            </label>
+                            <div class="col-sm-8">
+                                <p style="font-size:large; font-weight: bold;" readonly class="form-control-plaintext"
+                                   id="profilPicture">@Model.kullanici.TBL_KullaniciOzellik.KullaniciAdi</p>
+                                <a href="" class="" data-toggle="modal" data-target="#profilModal">Profil Resmini Degistir<br /></a>
+                                <small>(Fotoğraf yükledikten sonra Gönder tuşuna basınız)</small>
+                                <div class="modal fade" id="profilModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <input type="file" id="uploadfile" style="display: none;">
+                                                    <div class="col-sm-12  mx-auto">
+                                                        <div class="text-center font-weight-bold">
+                                                            <label class="mx-auto">
+
+                                                                <input type="file" value="" style="display: none;" name="uploadfile" id="uploadfile" accept="image/x-png,image/gif,image/jpeg">
+                                                                <a class="text-center font-weight-bold " style="color:#007bff ;">Fotoğraf Yükle</a>
+
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+
+                                                        @Html.ActionLink("Fotografi Kaldir", "resetPP", "Settings", null, new { @class = "text-center font-weight-bold d-block " })
+
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <a href="#">
+                                                            <p class="text-center font-weight-bold text-danger" class="close" data-dismiss="modal"
+                                                               aria-label="Close">Kapat</p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-3 col-form-label font-weight-bold">Adın</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(i => i.kullanici.Adi, new { @Value = Model.kullanici.Adi, @class = "form-control", id = "name", aria_describedby = "adin" })
+
+                                <small id="adin" class="form-text text-muted">
+                                    Adın ve soyadın, takma adın veya işletmenin adı gibi
+                                    tanındığın bir adı kullanarak insanların hesabını keşfetmesine yardımcı ol.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-3 col-form-label font-weight-bold">Kullanıcı Adı</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(i => i.kullanici.TBL_KullaniciOzellik.KullaniciAdi, new { @Value = Model.kullanici.TBL_KullaniciOzellik.KullaniciAdi, @class = "form-control", id = "username", @readonly = "readonly", aria_describedby = "username" })
+
+                                <small id="username" class="form-text text-muted">
+                                    Kullanıcı Adı Değiştirilememektedir.
+                                    @*<span>@Model.kullanici.TBL_KullaniciOzellik.KullaniciAdi</span> yapabileceksin.*@
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="unvan" class="col-sm-3 col-form-label font-weight-bold">Ünvanı</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(i => i.kullanici.TBL_KullaniciOzellik.Unvani, new { @Value = Model.kullanici.TBL_KullaniciOzellik.Unvani, @class = "form-control", id = "unvan", aria_describedby = "unvan" })
+
+                                <small id="username" class="form-text text-muted">
+                                    Ünvanınız.
+                                    @*<span>@Model.kullanici.TBL_KullaniciOzellik.KullaniciAdi</span> yapabileceksin.*@
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="website" class="col-sm-3 col-form-label font-weight-bold">İnternet Sitesi</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(i => i.kullanici.TBL_KullaniciOzellik.InternetSitesi, new { @Value = Model.kullanici.TBL_KullaniciOzellik.InternetSitesi, @class = "form-control", id = "website", placeholter = "İnternet Sitesi", aria_describedby = "website" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="summernote" class="col-sm-3 col-form-label font-weight-bold">Biyografi</label>
+                            <div class="col-sm-8">
+                                @Html.TextAreaFor(i => i.kullanici.TBL_KullaniciOzellik.Biyografi, new { @Value = Model.kullanici.TBL_KullaniciOzellik.Biyografi, @class = "form-control", rows = "3" })
+
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 col-form-label font-weight-bold">E-posta</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(i => i.kullanici.E_posta, new { @Value = Model.kullanici.E_posta, @class = "form-control", id = "email", @readonly = "readonly", aria_describedby = "email" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tel" class="col-sm-3 col-form-label font-weight-bold">Telefon Numarası</label>
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(i => i.kullanici.Telefon, new { @Value = Model.kullanici.Telefon, @class = "form-control", id = "tel", aria_describedby = "tel" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cinsiyet" class="col-sm-3 col-form-label font-weight-bold">Cinsiyet</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(i => i.kullanici.Cinsiyet, new SelectList(new List<Object> {
+                                "Kadın",
+                               "Erkek",
+                               "Belirtmek İstemiyorum" }), new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="col-sm-11 d-flex justify-content-end">
+                            <button type="submit" id="gonder" class="btn btn-primary btn-lg">Gönder</button>
+                        </div>
+                        <br><br>
+                    }
+
+
+                </div>
+
+
+
+
+
+                <div class="tab-pane fade" id="list-password" role="tabpanel" aria-labelledby="list-password-list">
+                    <form action="" class="p-4 ">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="password" class="col-sm-4 col-form-label font-weight-bold">Mevcut sifrenizi giriniz</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="password" placeholder="Mevcut Sifreniz">
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="newpass" class="col-sm-4 col-form-label font-weight-bold">Yeni Sifre</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="newpass" placeholder="yeni sifre">
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="newpass" class="col-sm-4 col-form-label font-weight-bold">Yeni Sifre Tekrar</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="newpass" placeholder="Yeni Sifre Tekrar">
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="col-sm-11 pr-4 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary btn-lg">Gönder</button>
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="list-ilan" role="tabpanel" aria-labelledby="list-ilan-list">
+                    <div class="row">
+                        @foreach (var item in Model.kullanici.TBL_IndexKart.AsEnumerable().Reverse())
+                        {
+                            if (item.Durum == true)
+                            {
+                                <div class="col-md-5 mb-2 mt-2">
+                                    <div class="card ">
+                                        <a href='@Url.Action("CardPage","CardPage",new {id=item.IndexKartID})'><img class="card-img-top" style="height:236px;" src="@item.KartResim1" alt=""></a>
+                                        <div class=" d-inline-block m-1">
+                                            <div class="">
+                                                <div>
+                                                    <a class="" href='@Url.Action("Profil","Profil",new {kullaniciAdi=item.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi })'>
+                                                        <img class="float-left rounded-circle"
+                                                             src="@item.TBL_Kullanici.TBL_KullaniciOzellik.ProfilResmi" style="width: 38px;" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="d-inline-block ml-1" style="height: 36px;">
+                                                    <div><a class="text-dark d-block font-weight-bold" style="font-size:14px" href='@Url.Action("Profil","Profil",new {kullaniciAdi=item.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi })'>@item.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi</a></div>
+                                                    <div>
+                                                        <p style="font-size:12px">@item.TBL_Kullanici.TBL_KullaniciOzellik.Unvani</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-body pt-1">
+                                            <div class="card-text " style="height:90px">
+                                                @if (item.KartBaslik.ToString().Length > 150)
+                                                {
+                                                    @Html.Raw(item.KartBaslik.Substring(0, 140));
+
+                                                    <span>...</span>
+                                                }
+                                                else
+                                                {
+                                                    @Html.Raw(item.KartBaslik)
+                                                }
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    @Html.ActionLink("Sil", "IlanSil", new { id = item.IndexKartID }, new { @class = "btn btn-danger" })
+
+                                                </div>
+                                                <div class="col-md-4"><a href="" class=""></a></div>
+                                                <div class="col-md-3">
+                                                    @if (item.KategoriID == -1)
+                                                    {
+                                                        <a href="" class="btn btn-primary">YARDIM</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href='@Url.Action("CardPage","CardPage",new {id=item.IndexKartID})' class="btn btn-primary">@item.Fiyat TL</a>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+
+                        }
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="tab-pane fade" id="list-profil-guncel" role="tabpanel" aria-labelledby="list-profil-guncelle">
+                    @using (Html.BeginForm("ProfilSettings", "Settings", new { id = Model.kullanici.KullaniciID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                        <div class="form-group row">
+                            <p class="col-12 font-weight-bold  d-block">Profil Açıklama</p>
+                            @Html.TextAreaFor(i => i.kullanici.TBL_Profil.TBL_ProfilIcerik.ProfilAciklama, new { @Value = Model.kullanici.TBL_Profil.TBL_ProfilIcerik.ProfilAciklama, @class = "col-11 form-control mx-auto w-100", id = "summernote", rows = "10" })
+
+
+                        </div>
+                        <br>
+                        <br>
+                        <p class="col col-form-label font-weight-bold text-center">En az 1 adet en fazla 3 adet resim yükleyiniz</p>
+                        <div class="form-group">
+                            <label for="İlanResmi1">Profil Carousel Slider Resim 1</label>
+
+                            <input type="file" class="form-control" name="ProfilResim1" id="ProfilResim1" accept="image/x-png,image/gif,image/jpeg">
+                        </div>
+                        <div class="form-group">
+                            <label for="ProfilResim2">Profil Carousel Slider Resim 2</label>
+                            <input type="file" class="form-control" id="ProfilResim2" name="ProfilResim2" accept="image/x-png,image/gif,image/jpeg">
+                        </div>
+                        <div class="form-group">
+                            <label for="ProfilResim2">Profil Carousel Slider Resim 3</label>
+                            <input type="file" class="form-control" id="ProfilResim3" name="ProfilResim3" accept="image/x-png,image/gif,image/jpeg">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-sm-11 d-flex justify-content-end">
+                            <button type="submit" id="gonder" class="btn btn-primary btn-lg">Gönder</button>
+                        </div>
+                        <br>
+                        <br>
+                    }
+                    <hr />
+                    <h2 class="text-center">Profil Kart Ekle</h2>
+                    @* Profil Kart Ekleme *@
+                    @using (Html.BeginForm("ProfilCardAdd", "Settings", new { kullaniciAdi = Model.kullanici.TBL_KullaniciOzellik.KullaniciAdi }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+
+
+
+                        <div class="form-group">
+                            <label for="cardBaslik">Profil Kart Başlık</label>
+                            @Html.TextBoxFor(i => i.CardAdd.PKart_Baslik, new { @class = "form-control", id = "cardBaslik", aria_describedby = "cardBaslik" })
+                        </div>
+                        <div class="form-group row">
+                            <p class="col-12 font-weight-bold  d-block">Kart Açıklama</p>
+                            @Html.TextAreaFor(i => i.CardAdd.PKart_Aciklama, new { @class = "col-11 form-control mx-auto w-100", rows = "3" })
+
+                        </div>
+                        <br>
+                        <br>
+                        <p class="col col-form-label font-weight-bold text-center">Kart İçin Resim yükleyiniz</p>
+                        <div class="form-group">
+                            <label for="CardImg">Resim 1</label>
+
+                            <input type="file" class="form-control" name="CardImg" id="CardImg" accept="image/x-png,image/gif,image/jpeg">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-sm-11 d-flex justify-content-end">
+                            <button type="submit" id="gonder" class="btn btn-primary btn-lg">Gönder</button>
+                        </div>
+                        <br>
+                        <br>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

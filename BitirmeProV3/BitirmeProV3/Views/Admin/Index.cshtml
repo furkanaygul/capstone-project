@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BitirmeProV3.Identity.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="panel panel-primary container mt-20">
+    <label>@User.Identity.Name</label>
+    <a class="btn btn-danger" href="/Account/Logout">ÇIKIŞ YAP</a>
+    <div class="panel-heading">
+        Users
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Surname</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>@item.Id</td>
+        <td>@item.UserName</td>
+        <td>@item.Email</td>
+        <td>@item.Name</td>
+        <td>@item.Surname</td>
+
+    </tr>
+        }
+        @*@if (Model.Count() == 0)
+        {
+            <tr colspan="3" class="text-center">Kullanici Yok</tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                </tr>
+            }
+
+        }*@
+    </table>
+</div>
+

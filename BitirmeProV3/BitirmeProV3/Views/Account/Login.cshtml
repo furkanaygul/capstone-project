@@ -1,0 +1,52 @@
+﻿@model BitirmeProV3.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container h-100 login-page">
+    <div class="row align-items-center h-100">
+        <div class="col-6 mx-auto h-100">
+            <div class="jumbotron bg-light">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />//kullanici giris yaptiysa daha once gitmek istedigi adrese gitsin
+                    
+                    if (ViewData.ModelState[""] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Html.ValidationSummary()
+                        </div>
+
+                    }
+                    
+
+                    <div class="form-group text-center">
+                        <h3>GİRİŞ</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="usernameInput">Kullanıcı Adı</label>
+                        @Html.TextBoxFor(i => i.Username, new { @class = "form-control", id = "usernameInput", placeholder = "Kullanıcı Adı" })
+
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordLoginInput">Şifre</label>
+                        @Html.PasswordFor(i => i.Password, new { @class = "form-control", id = "passwordLoginInput", placeholder = "Şifre" })
+
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                            <label class="custom-control-label" for="customCheck"> Beni Hatırla</label>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-success w-75 mt-3" type="submit" style="height: 50px;">Giriş</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

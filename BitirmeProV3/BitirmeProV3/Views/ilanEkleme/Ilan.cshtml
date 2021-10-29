@@ -1,0 +1,95 @@
+﻿@model BitirmeProV3.Models.IlanModel
+@{
+    ViewBag.Title = "Ilan";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="container h-100 login-page">
+    <div class="row align-items-center h-100">
+        <div class="col-6 mx-auto h-100">
+            <div class="jumbotron bg-light">
+                @using (Html.BeginForm("Ilan", "ilanEkleme",null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count() > 0)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Html.ValidationSummary()
+                        </div>
+
+                    }
+                    @Html.AntiForgeryToken()
+                    <div class="form-group text-center">
+                        <h3>İLAN VER</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="IlanBaslik">İlan Başlığı</label>
+                        @Html.TextBoxFor(i=>i.Ilan.KartBaslik,new {@class="form-control", id="IlanBaslik" ,placeholder="İlan Başlığı" })
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="summernote">İlan Açıklaması</label>
+                        @Html.TextAreaFor(i => i.Ilan.KartAciklamasi, new { name = "textarea", @class="form-control", id="summernote",placeholder="İlan Açıklaması" ,cols="10", rows="5"})
+                        
+                    </div>
+                    <hr>
+                    <label class="d-block text-center" for="">En az 1 en fazla 3 adet resim Yükleyiniz</label>
+                    <hr>
+                    <div class="form-group">
+                        <label for="İlanResmi1">İlan Resmi-1</label>
+                        
+                        <input type="file" class="form-control" name="ilanResmi1" id="ilanResmi1" accept="image/x-png,image/gif,image/jpeg">
+                    </div>
+                    <div class="form-group">
+                        <label for="ilanResmi2">İlan Resmi-2</label>
+                        <input type="file" class="form-control" id="ilanResmi2" name="ilanResmi2" accept="image/x-png,image/gif,image/jpeg">
+                    </div>
+                    <div class="form-group">
+                        <label for="ilanResmi3">İlan Resmi-3</label>
+                        <input type="file" class="form-control" id="ilanResmi3" name="ilanResmi3" accept="image/x-png,image/gif,image/jpeg">
+                    </div>
+                    <div class="form-group">
+                        <hr>
+                        <div class="container">
+                            <label for="fiyat">Fiyatı giriniz eğer bu bir yardım ilanı ise kutucuğu işaretleyiniz</label>
+                            <div class="row justify-content-start">
+                                <div class="col-6">
+                                    @Html.TextBoxFor(i=>i.Ilan.Fiyat,new{type="number",@class= "form-control fiyat",id="IlanFiyat",placeholder=100})
+                                    @*<input type="number" class="form-control fiyat" id="IlanFiyat" placeholder="Fiyatı">*@
+
+                                </div>
+                                <div class="col-2">
+                                    @Html.CheckBoxFor(i=>i.yardim,new { onclick = "document.getElementById('IlanFiyat').disabled=this.checked;", @class="form-control checkbox", id="IlanBaslik" })
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="">Kategorisini Seçiniz</label>
+                        @Html.DropDownListFor(i => i.ktgr,new SelectList(Model.kategori),"Kategori", new {@class="form-control w-50" })
+                        @*<div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle w-100" data-toggle="dropdown">
+                                Dropdown button
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Link 1</a>
+                                <a class="dropdown-item" href="#">Link 2</a>
+                                <a class="dropdown-item" href="#">Link 3</a>
+                            </div>
+                        </div>*@
+                    </div>
+
+
+                    <div class="form-group text-center">
+                        <button class="btn btn-success w-75 mt-3" type="submit" style="height: 50px;">YAYINLA</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

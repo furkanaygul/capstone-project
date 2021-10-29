@@ -1,0 +1,29 @@
+﻿.border {
+    border-width: 4px !important;
+}
+
+.boxsizingBorder {
+    width: 100%;
+    height: 75px;
+    resize: none;
+}
+
+.carousel-indicators {
+    margin-top: 20px !important;
+    position: relative !important;
+}
+
+.carousel-li {
+    opacity: 0.5;
+}
+
+    .carousel-li:hover {
+        opacity: 1;
+    }
+
+
+
+.w-h-100 {
+    width: 100px !important;
+    height: 100px !important;
+}

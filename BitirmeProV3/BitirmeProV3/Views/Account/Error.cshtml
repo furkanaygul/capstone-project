@@ -1,0 +1,15 @@
+﻿@model string[]
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="container mt-20 panel panel-danger">
+    @foreach (var err in Model)
+    {
+        <h4>@err</h4>
+    }
+</div>
+
+

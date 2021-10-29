@@ -1,0 +1,83 @@
+﻿@model BitirmeProV3.Models.Register
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="container mt-5 w-25" style="min-width:300px;">
+    @using (Html.BeginForm())
+    {
+    <div class="form-group text-center pt-5 mb-3">
+        <H1>Üye Ol</H1>
+        <hr />
+
+        @if (ViewData.ModelState[""] != null )
+        {
+            <div class="alert alert-danger" role="alert">
+                @Html.ValidationSummary()
+            </div>
+
+        }
+    </div>
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label for="nameInput">Adı</label>
+            @Html.TextBoxFor(i => i.name, new { @placeholder = "Adınız", @id = "nameInput", @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <label for="surnameInput">Soyadı</label>
+            @Html.TextBoxFor(i => i.surname, new { @placeholder = "Soyadınız", @id = "surnameInput", @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="nicknameInput">Kullanıcı Adı</label>
+            @Html.TextBoxFor(i => i.Username, new { @placeholder = "Kullanıcı Adınız", @id = "nicknameInput", @class = "form-control" })
+
+        </div>
+        <div class="form-group">
+            <label for="mailInput">E-Posta Adresi</label>
+            @Html.TextBoxFor(i => i.Email, new { @type = "email", @placeholder = "Mail adresi giriniz", @id = "mailInput", @class = "form-control" })
+            <small class="form-text text-muted">E-Posta adresiniz kimse ile paylaşılmaz</small>
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Şifre</label>
+            @Html.TextBoxFor(i => i.Password, new { @type = "password", @placeholder = "Şifre", @id = "passwordInput", @class = "form-control" })
+            <small class="form-text text-muted">En az 8 karakter,En Çok 20 karakter</small>
+        </div>
+        <div class="form-group">
+            <label for="passwordInput1">Şifre(Tekrar)</label>
+            @Html.TextBoxFor(i => i.PasswordControl, new { @type = "password", @placeholder = "Şifre(Tekrar)", @id = "passwordInput1", @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                @Html.CheckBoxFor(i=>i.checkbox1,new { @class = "custom-control-input", id = "customCheck1", @checked = "checked" })
+                <label class="custom-control-label" for="customCheck1">
+                    <a href="#">Üyelik Sözleşmesi </a>
+                    şartlarını okudum ve kabul ediyorum
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                @Html.CheckBoxFor(i => i.checkbox2, new { @class = "custom-control-input", id = "customCheck2", @checked="checked"})
+                <label class="custom-control-label" for="customCheck2">
+                    Tarafımla pazarlama ve tanıtım amaçlı
+                    iletişime geçilmesine izin veriyorum.
+                </label>
+            </div>
+        </div>
+        <button class="btn btn-primary w-100" type="submit">Üye Ol</button>
+    }
+    <div class="mt-3">
+        <div class="row mb-5">
+            <div class="col">
+                <h3>Zaten Üyemisiniz?</h3>
+            </div>
+            <div class="col">
+                @Html.ActionLink("Giriş Yap", "Login", "Account", new { @class ="btn btn-success w-100 h-75" })
+                
+            </div>
+        </div>
+    </div>
+    <!-- =========container sonu========= -->
+</div>

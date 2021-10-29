@@ -1,0 +1,29 @@
+﻿@using BitirmeProV3.Models.Entity
+@model List<TBL_Kategori>
+
+
+
+@foreach (var ktgr in Model)
+{
+    <a class="col border radius btn btn-outline-danger stretched-link ml-1" href="@Url.Action("Kategori","Main",new {id=ktgr.KategoriID })">@ktgr.KategoriAdi</a>
+    if (ktgr.KategoriID == 4)
+    {
+        break;
+    }
+}
+<div class="dropdown dropdown-menu-down">
+    <a class="col border radius btn btn-outline-danger stretched-link ml-1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Kategoriler
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        @foreach (var ktgr in Model)
+        {
+            <a class="col border radius btn btn-outline-danger stretched-link p-2" href="@Url.Action("Kategori","Main",new {id=ktgr.KategoriID })">@ktgr.KategoriAdi</a>
+        }
+    </div>
+</div>
+<a class="btn btn-outline-success ml-2" href="@Url.Action("Kategori","Main",new {id=-1 })">YARDIM</a>
+
+
+

@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BitirmeProjesiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TBL_IndexCardComment">
+    <Key>
+      <PropertyRef Name="CardCommentID" />
+    </Key>
+    <Property Name="CardCommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="IndexKartID" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_IndexKart">
+    <Key>
+      <PropertyRef Name="IndexKartID" />
+    </Key>
+    <Property Name="IndexKartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KartAciklamasi" Type="nvarchar(max)" />
+    <Property Name="Fiyat" Type="int" />
+    <Property Name="AliciSatici" Type="bit" />
+    <Property Name="Durum" Type="bit" />
+    <Property Name="KartResim1" Type="nvarchar" MaxLength="500" />
+    <Property Name="KartResim2" Type="nvarchar" MaxLength="500" />
+    <Property Name="KartResim3" Type="nvarchar" MaxLength="500" />
+    <Property Name="KullaniciID" Type="int" />
+    <Property Name="KategoriID" Type="int" />
+    <Property Name="KartBaslik" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="TBL_Kategori">
+    <Key>
+      <PropertyRef Name="KategoriID" />
+    </Key>
+    <Property Name="KategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="KategoriDurumu" Type="bit" />
+    <Property Name="KategoriRank" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_Kullanici">
+    <Key>
+      <PropertyRef Name="KullaniciID" />
+    </Key>
+    <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" />
+    <Property Name="E-posta" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefon" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cinsiyet" Type="nvarchar" MaxLength="50" />
+    <Property Name="DogumTarihi" Type="datetime" />
+    <Property Name="UyelikTarihi" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TBL_KullaniciOzellik">
+    <Key>
+      <PropertyRef Name="KullaniciOzellikID" />
+    </Key>
+    <Property Name="KullaniciOzellikID" Type="int" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProfilResmi" Type="nvarchar" MaxLength="500" />
+    <Property Name="InternetSitesi" Type="nvarchar" MaxLength="200" />
+    <Property Name="Biyografi" Type="nvarchar" MaxLength="500" />
+    <Property Name="Unvani" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TBL_Profil">
+    <Key>
+      <PropertyRef Name="ProfilID" />
+    </Key>
+    <Property Name="ProfilID" Type="int" Nullable="false" />
+    <Property Name="ToplamIsSayisi" Type="int" />
+    <Property Name="OrtalamaYanitSure" Type="int" />
+    <Property Name="SonGiris" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TBL_ProfilIcerik">
+    <Key>
+      <PropertyRef Name="ProfilIcerikID" />
+    </Key>
+    <Property Name="ProfilIcerikID" Type="int" Nullable="false" />
+    <Property Name="ProfilCarouselPic1" Type="nvarchar" MaxLength="500" />
+    <Property Name="ProfilCarouselPic2" Type="nvarchar" MaxLength="500" />
+    <Property Name="ProfilCarouselPic3" Type="nvarchar" MaxLength="500" />
+    <Property Name="ProfilAciklama" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TBL_ProfilKart">
+    <Key>
+      <PropertyRef Name="ProfilKartID" />
+    </Key>
+    <Property Name="ProfilKartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PKart_Baslik" Type="nvarchar" MaxLength="50" />
+    <Property Name="PKart_Aciklama" Type="nvarchar" MaxLength="200" />
+    <Property Name="PKart_Resim" Type="nvarchar" MaxLength="500" />
+    <Property Name="ProfilID" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_Yorumlar">
+    <Key>
+      <PropertyRef Name="YorumID" />
+    </Key>
+    <Property Name="YorumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="Yorum" Type="nvarchar(max)" />
+    <Property Name="YorumYapanKulAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="YorumYapanKulPP" Type="nvarchar" MaxLength="500" />
+    <Property Name="Puan" Type="tinyint" />
+  </EntityType>
+  <Association Name="FK_TBL_IndexCardComment_TBL_IndexKart">
+    <End Role="TBL_IndexKart" Type="Self.TBL_IndexKart" Multiplicity="0..1" />
+    <End Role="TBL_IndexCardComment" Type="Self.TBL_IndexCardComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_IndexKart">
+        <PropertyRef Name="IndexKartID" />
+      </Principal>
+      <Dependent Role="TBL_IndexCardComment">
+        <PropertyRef Name="IndexKartID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_IndexKart_TBL_Kategori">
+    <End Role="TBL_Kategori" Type="Self.TBL_Kategori" Multiplicity="0..1" />
+    <End Role="TBL_IndexKart" Type="Self.TBL_IndexKart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Kategori">
+        <PropertyRef Name="KategoriID" />
+      </Principal>
+      <Dependent Role="TBL_IndexKart">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_IndexKart_TBL_Kullanici">
+    <End Role="TBL_Kullanici" Type="Self.TBL_Kullanici" Multiplicity="0..1" />
+    <End Role="TBL_IndexKart" Type="Self.TBL_IndexKart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="TBL_IndexKart">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_KullaniciOzellik_TBL_Kullanici">
+    <End Role="TBL_Kullanici" Type="Self.TBL_Kullanici" Multiplicity="1" />
+    <End Role="TBL_KullaniciOzellik" Type="Self.TBL_KullaniciOzellik" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="TBL_KullaniciOzellik">
+        <PropertyRef Name="KullaniciOzellikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_Profil_TBL_Kullanici">
+    <End Role="TBL_Kullanici" Type="Self.TBL_Kullanici" Multiplicity="1" />
+    <End Role="TBL_Profil" Type="Self.TBL_Profil" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="TBL_Profil">
+        <PropertyRef Name="ProfilID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ProfilIcerik_TBL_Profil">
+    <End Role="TBL_Profil" Type="Self.TBL_Profil" Multiplicity="1" />
+    <End Role="TBL_ProfilIcerik" Type="Self.TBL_ProfilIcerik" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Profil">
+        <PropertyRef Name="ProfilID" />
+      </Principal>
+      <Dependent Role="TBL_ProfilIcerik">
+        <PropertyRef Name="ProfilIcerikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ProfilKart_TBL_Profil">
+    <End Role="TBL_Profil" Type="Self.TBL_Profil" Multiplicity="0..1" />
+    <End Role="TBL_ProfilKart" Type="Self.TBL_ProfilKart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Profil">
+        <PropertyRef Name="ProfilID" />
+      </Principal>
+      <Dependent Role="TBL_ProfilKart">
+        <PropertyRef Name="ProfilID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_Yorumlar_TBL_Kullanici">
+    <End Role="TBL_Kullanici" Type="Self.TBL_Kullanici" Multiplicity="0..1" />
+    <End Role="TBL_Yorumlar" Type="Self.TBL_Yorumlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="TBL_Yorumlar">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BitirmeProjesiDBModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_IndexCardComment" EntityType="Self.TBL_IndexCardComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_IndexKart" EntityType="Self.TBL_IndexKart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_Kategori" EntityType="Self.TBL_Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_Kullanici" EntityType="Self.TBL_Kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_KullaniciOzellik" EntityType="Self.TBL_KullaniciOzellik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_Profil" EntityType="Self.TBL_Profil" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ProfilIcerik" EntityType="Self.TBL_ProfilIcerik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ProfilKart" EntityType="Self.TBL_ProfilKart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_Yorumlar" EntityType="Self.TBL_Yorumlar" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TBL_IndexCardComment_TBL_IndexKart" Association="Self.FK_TBL_IndexCardComment_TBL_IndexKart">
+      <End Role="TBL_IndexKart" EntitySet="TBL_IndexKart" />
+      <End Role="TBL_IndexCardComment" EntitySet="TBL_IndexCardComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_IndexKart_TBL_Kategori" Association="Self.FK_TBL_IndexKart_TBL_Kategori">
+      <End Role="TBL_Kategori" EntitySet="TBL_Kategori" />
+      <End Role="TBL_IndexKart" EntitySet="TBL_IndexKart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_IndexKart_TBL_Kullanici" Association="Self.FK_TBL_IndexKart_TBL_Kullanici">
+      <End Role="TBL_Kullanici" EntitySet="TBL_Kullanici" />
+      <End Role="TBL_IndexKart" EntitySet="TBL_IndexKart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_KullaniciOzellik_TBL_Kullanici" Association="Self.FK_TBL_KullaniciOzellik_TBL_Kullanici">
+      <End Role="TBL_Kullanici" EntitySet="TBL_Kullanici" />
+      <End Role="TBL_KullaniciOzellik" EntitySet="TBL_KullaniciOzellik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_Profil_TBL_Kullanici" Association="Self.FK_TBL_Profil_TBL_Kullanici">
+      <End Role="TBL_Kullanici" EntitySet="TBL_Kullanici" />
+      <End Role="TBL_Profil" EntitySet="TBL_Profil" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ProfilIcerik_TBL_Profil" Association="Self.FK_TBL_ProfilIcerik_TBL_Profil">
+      <End Role="TBL_Profil" EntitySet="TBL_Profil" />
+      <End Role="TBL_ProfilIcerik" EntitySet="TBL_ProfilIcerik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ProfilKart_TBL_Profil" Association="Self.FK_TBL_ProfilKart_TBL_Profil">
+      <End Role="TBL_Profil" EntitySet="TBL_Profil" />
+      <End Role="TBL_ProfilKart" EntitySet="TBL_ProfilKart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_Yorumlar_TBL_Kullanici" Association="Self.FK_TBL_Yorumlar_TBL_Kullanici">
+      <End Role="TBL_Kullanici" EntitySet="TBL_Kullanici" />
+      <End Role="TBL_Yorumlar" EntitySet="TBL_Yorumlar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

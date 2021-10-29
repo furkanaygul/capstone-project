@@ -1,0 +1,133 @@
+﻿@model BitirmeProV3.Models.AramaSonucModel
+@{
+    ViewBag.Title = "AramaSonuc";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="container mt-5" style="padding-top: 50px;">
+    <div class="row">
+        <div class="col-4 ">
+            <div class="list-group" id="list-tab" role="tablist">
+
+                <a class="list-group-item list-group-item-action active" id="list-profil-list" data-toggle="list"
+                   href="#list-profil" role="tab" aria-controls="profil">Kullanıcılar</a>
+                <a class="list-group-item list-group-item-action" id="list-profil-guncelle" data-toggle="list"
+                   href="#list-profil-guncel" role="tab" aria-controls="list-profil-guncel">İlanlar</a>
+
+
+            </div>
+        </div>
+        <div class="col-8 p-4  bg-light">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active p-3" id="list-profil" role="tabpanel" aria-labelledby="list-profil-list">
+                    @if (Model.Kullanici.Count() > 0)
+                    {
+                        foreach (var item in Model.Kullanici)
+                        {
+                            <div class="row border p-2 bg-light rounded mb-2">
+
+                                <div class="col-md-2 d-inline-block">
+                                    <a href="@Url.Action("Profil","Profil",new {kullaniciAdi=item.TBL_KullaniciOzellik.KullaniciAdi })">
+                                        <img class="rounded-circle" style="width:80px; height:80px;"
+                                             src="@item.TBL_KullaniciOzellik.ProfilResmi" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="col"><a href="@Url.Action("Profil","Profil",new {kullaniciAdi=item.TBL_KullaniciOzellik.KullaniciAdi })" class="text-dark"><label>@item.TBL_KullaniciOzellik.KullaniciAdi</label></a></div>
+                                    <div class="col">
+                                        <label style="word-break: break-all;">
+                                            @if (item.TBL_KullaniciOzellik.Biyografi != null)
+                                            {
+                                                if (item.TBL_KullaniciOzellik.Biyografi.Length > 110)
+                                                {
+                                                    @item.TBL_KullaniciOzellik.Biyografi.Substring(0, 110)
+                                                }
+                                                else
+                                                {
+                                                    @item.TBL_KullaniciOzellik.Biyografi
+                                                }
+                                            }
+
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        }
+                    }
+                    else
+                    {
+                        <h2 class="text-center">Kullanici Bulunamadi</h2>
+                    }
+
+
+
+                </div>
+
+                <div class="tab-pane fade" id="list-profil-guncel" role="tabpanel" aria-labelledby="list-profil-guncelle">
+                    <div class="row">
+                        @if (Model.Ilanlar.Count > 0)
+                        {
+                            foreach (var item in Model.Ilanlar.AsEnumerable().Reverse())
+                            {
+                                if (item.Durum == true)
+                                {
+                                    <div class="col-md-5 mb-2 mt-2">
+                                        <div class="card ">
+                                            <a href='@Url.Action("CardPage","CardPage",new {id=item.IndexKartID})'><img class="card-img-top" style="height:236px;" src="@item.KartResim1" alt=""></a>
+                                            <div class=" d-inline-block m-1">
+                                                <div class="">
+                                                    <div>
+                                                        <a class="" href='@Url.Action("Profil","Profil",new {kullaniciAdi=item.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi })'>
+                                                            <img class="float-left rounded-circle"
+                                                                 src="@item.TBL_Kullanici.TBL_KullaniciOzellik.ProfilResmi" style="width: 38px;" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="d-inline-block ml-1" style="height: 36px;">
+                                                        <div><a class="text-dark d-block font-weight-bold" style="font-size:14px" href='@Url.Action("Profil","Profil",new {kullaniciAdi=item.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi })'>@item.TBL_Kullanici.TBL_KullaniciOzellik.KullaniciAdi</a></div>
+                                                        <div>
+                                                            <p style="font-size:12px">@item.TBL_Kullanici.TBL_KullaniciOzellik.Unvani</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="card-body pt-1">
+                                                <div class="card-text " style="height:90px">
+                                                    @if (item.KartBaslik.ToString().Length > 150)
+                                                    {
+                                                        @Html.Raw(item.KartBaslik.Substring(0, 140));
+
+                                                        <span>...</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.Raw(item.KartBaslik)
+                                                    }
+                                                </div>
+                                                <div class="w-100"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+
+
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            <h2>ILAN BULUNAMADI</h2>
+                        }
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
